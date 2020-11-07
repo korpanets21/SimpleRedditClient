@@ -7,14 +7,29 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		4580EBC52556CBCE009F443E /* TopEntryGatewayFetchFailingStub.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4580EBC42556CBCE009F443E /* TopEntryGatewayFetchFailingStub.swift */; };
+		4580EBCA2556CC09009F443E /* TestError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4580EBC92556CC09009F443E /* TestError.swift */; };
+		4580EBD02556D252009F443E /* ErrorFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4580EBCF2556D252009F443E /* ErrorFormatter.swift */; };
+		4580EBD82556D586009F443E /* TopEntryAuthorInfoFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4580EBD72556D586009F443E /* TopEntryAuthorInfoFormatter.swift */; };
+		4580EBF02556D61A009F443E /* TopEntryAuthorInfoFormatterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4580EBEF2556D61A009F443E /* TopEntryAuthorInfoFormatterTests.swift */; };
+		458E7EBD2556C61400F99A2C /* TopEntryListViewMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 458E7EBC2556C61400F99A2C /* TopEntryListViewMock.swift */; };
+		458E7EC22556C79200F99A2C /* TopEntryListViewDummy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 458E7EC12556C79200F99A2C /* TopEntryListViewDummy.swift */; };
+		45B4F7D12553EF9B00EC6710 /* Top+Stubs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45B4F7D02553EF9B00EC6710 /* Top+Stubs.swift */; };
 		45F003482553E073009733D0 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45F003472553E073009733D0 /* AppDelegate.swift */; };
 		45F0034A2553E073009733D0 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45F003492553E073009733D0 /* SceneDelegate.swift */; };
-		45F0034C2553E073009733D0 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45F0034B2553E073009733D0 /* ViewController.swift */; };
+		45F0034C2553E073009733D0 /* TopEntryListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45F0034B2553E073009733D0 /* TopEntryListViewController.swift */; };
 		45F0034F2553E073009733D0 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 45F0034D2553E073009733D0 /* Main.storyboard */; };
 		45F003512553E075009733D0 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 45F003502553E075009733D0 /* Assets.xcassets */; };
 		45F003542553E075009733D0 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 45F003522553E075009733D0 /* LaunchScreen.storyboard */; };
-		45F0035F2553E076009733D0 /* SimpleRedditClientTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45F0035E2553E076009733D0 /* SimpleRedditClientTests.swift */; };
 		45F0036A2553E076009733D0 /* SimpleRedditClientUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45F003692553E076009733D0 /* SimpleRedditClientUITests.swift */; };
+		45F003822553E5B5009733D0 /* TopEntryListPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45F003812553E5B5009733D0 /* TopEntryListPresenter.swift */; };
+		45F003872553E611009733D0 /* TopListPresenterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45F003862553E611009733D0 /* TopListPresenterTests.swift */; };
+		45F0038C2553E623009733D0 /* TestCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45F0038B2553E623009733D0 /* TestCase.swift */; };
+		45F003962553E7C9009733D0 /* TopEntryGateway.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45F003952553E7C9009733D0 /* TopEntryGateway.swift */; };
+		45F003A62553E83C009733D0 /* TopEntryGatewayDummy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45F003A52553E83C009733D0 /* TopEntryGatewayDummy.swift */; };
+		45F003AE2553E8AA009733D0 /* TopEntryGatewayMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45F003AD2553E8AA009733D0 /* TopEntryGatewayMock.swift */; };
+		45F003B32553EC93009733D0 /* TopEntryGatewayFetchSuccessfullyStub.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45F003B22553EC93009733D0 /* TopEntryGatewayFetchSuccessfullyStub.swift */; };
+		45F003B92553ECCA009733D0 /* TopEntry.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45F003B82553ECCA009733D0 /* TopEntry.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -35,20 +50,35 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		4580EBC42556CBCE009F443E /* TopEntryGatewayFetchFailingStub.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopEntryGatewayFetchFailingStub.swift; sourceTree = "<group>"; };
+		4580EBC92556CC09009F443E /* TestError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestError.swift; sourceTree = "<group>"; };
+		4580EBCF2556D252009F443E /* ErrorFormatter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorFormatter.swift; sourceTree = "<group>"; };
+		4580EBD72556D586009F443E /* TopEntryAuthorInfoFormatter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopEntryAuthorInfoFormatter.swift; sourceTree = "<group>"; };
+		4580EBEF2556D61A009F443E /* TopEntryAuthorInfoFormatterTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopEntryAuthorInfoFormatterTests.swift; sourceTree = "<group>"; };
+		458E7EBC2556C61400F99A2C /* TopEntryListViewMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopEntryListViewMock.swift; sourceTree = "<group>"; };
+		458E7EC12556C79200F99A2C /* TopEntryListViewDummy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopEntryListViewDummy.swift; sourceTree = "<group>"; };
+		45B4F7D02553EF9B00EC6710 /* Top+Stubs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Top+Stubs.swift"; sourceTree = "<group>"; };
 		45F003442553E073009733D0 /* SimpleRedditClient.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SimpleRedditClient.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		45F003472553E073009733D0 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		45F003492553E073009733D0 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		45F0034B2553E073009733D0 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		45F0034B2553E073009733D0 /* TopEntryListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopEntryListViewController.swift; sourceTree = "<group>"; };
 		45F0034E2553E073009733D0 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		45F003502553E075009733D0 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		45F003532553E075009733D0 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		45F003552553E075009733D0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		45F0035A2553E076009733D0 /* SimpleRedditClientTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SimpleRedditClientTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		45F0035E2553E076009733D0 /* SimpleRedditClientTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SimpleRedditClientTests.swift; sourceTree = "<group>"; };
 		45F003602553E076009733D0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		45F003652553E076009733D0 /* SimpleRedditClientUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SimpleRedditClientUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		45F003692553E076009733D0 /* SimpleRedditClientUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SimpleRedditClientUITests.swift; sourceTree = "<group>"; };
 		45F0036B2553E076009733D0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		45F003812553E5B5009733D0 /* TopEntryListPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopEntryListPresenter.swift; sourceTree = "<group>"; };
+		45F003862553E611009733D0 /* TopListPresenterTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopListPresenterTests.swift; sourceTree = "<group>"; };
+		45F0038B2553E623009733D0 /* TestCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestCase.swift; sourceTree = "<group>"; };
+		45F003952553E7C9009733D0 /* TopEntryGateway.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopEntryGateway.swift; sourceTree = "<group>"; };
+		45F003A52553E83C009733D0 /* TopEntryGatewayDummy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopEntryGatewayDummy.swift; sourceTree = "<group>"; };
+		45F003AD2553E8AA009733D0 /* TopEntryGatewayMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopEntryGatewayMock.swift; sourceTree = "<group>"; };
+		45F003B22553EC93009733D0 /* TopEntryGatewayFetchSuccessfullyStub.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopEntryGatewayFetchSuccessfullyStub.swift; sourceTree = "<group>"; };
+		45F003B82553ECCA009733D0 /* TopEntry.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopEntry.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -76,6 +106,77 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		4580EBCE2556D23E009F443E /* Formatters */ = {
+			isa = PBXGroup;
+			children = (
+				4580EBCF2556D252009F443E /* ErrorFormatter.swift */,
+				4580EBD72556D586009F443E /* TopEntryAuthorInfoFormatter.swift */,
+			);
+			path = Formatters;
+			sourceTree = "<group>";
+		};
+		4580EBDC2556D5C3009F443E /* Scenes */ = {
+			isa = PBXGroup;
+			children = (
+				45F0037D2553E59E009733D0 /* TopList */,
+			);
+			path = Scenes;
+			sourceTree = "<group>";
+		};
+		4580EBE02556D5EC009F443E /* TopList */ = {
+			isa = PBXGroup;
+			children = (
+				45F003862553E611009733D0 /* TopListPresenterTests.swift */,
+				45F003A42553E828009733D0 /* TestDoubles */,
+			);
+			path = TopList;
+			sourceTree = "<group>";
+		};
+		4580EBE72556D5F7009F443E /* Scenes */ = {
+			isa = PBXGroup;
+			children = (
+				4580EBE02556D5EC009F443E /* TopList */,
+			);
+			path = Scenes;
+			sourceTree = "<group>";
+		};
+		4580EBEE2556D60A009F443E /* Formatters */ = {
+			isa = PBXGroup;
+			children = (
+				4580EBEF2556D61A009F443E /* TopEntryAuthorInfoFormatterTests.swift */,
+			);
+			path = Formatters;
+			sourceTree = "<group>";
+		};
+		458E7EAD2556B7A400F99A2C /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				45F003502553E075009733D0 /* Assets.xcassets */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
+		458E7EC92556C7E700F99A2C /* TopEntryGateway */ = {
+			isa = PBXGroup;
+			children = (
+				45F003A52553E83C009733D0 /* TopEntryGatewayDummy.swift */,
+				45F003AD2553E8AA009733D0 /* TopEntryGatewayMock.swift */,
+				45F003B22553EC93009733D0 /* TopEntryGatewayFetchSuccessfullyStub.swift */,
+				4580EBC42556CBCE009F443E /* TopEntryGatewayFetchFailingStub.swift */,
+			);
+			path = TopEntryGateway;
+			sourceTree = "<group>";
+		};
+		45B4F7CF2553EF7800EC6710 /* TestDoubles */ = {
+			isa = PBXGroup;
+			children = (
+				458E7EC92556C7E700F99A2C /* TopEntryGateway */,
+				45B4F7D02553EF9B00EC6710 /* Top+Stubs.swift */,
+				4580EBC92556CC09009F443E /* TestError.swift */,
+			);
+			path = TestDoubles;
+			sourceTree = "<group>";
+		};
 		45F0033B2553E073009733D0 = {
 			isa = PBXGroup;
 			children = (
@@ -99,13 +200,11 @@
 		45F003462553E073009733D0 /* SimpleRedditClient */ = {
 			isa = PBXGroup;
 			children = (
-				45F003472553E073009733D0 /* AppDelegate.swift */,
-				45F003492553E073009733D0 /* SceneDelegate.swift */,
-				45F0034B2553E073009733D0 /* ViewController.swift */,
-				45F0034D2553E073009733D0 /* Main.storyboard */,
-				45F003502553E075009733D0 /* Assets.xcassets */,
-				45F003522553E075009733D0 /* LaunchScreen.storyboard */,
-				45F003552553E075009733D0 /* Info.plist */,
+				45F003CA2556B6F3009733D0 /* System */,
+				458E7EAD2556B7A400F99A2C /* Resources */,
+				45F003B72553ECBA009733D0 /* Domain */,
+				45F003942553E7BB009733D0 /* Data */,
+				45F003902553E7A2009733D0 /* Presentation */,
 			);
 			path = SimpleRedditClient;
 			sourceTree = "<group>";
@@ -113,8 +212,10 @@
 		45F0035D2553E076009733D0 /* SimpleRedditClientTests */ = {
 			isa = PBXGroup;
 			children = (
-				45F0035E2553E076009733D0 /* SimpleRedditClientTests.swift */,
+				45B4F7CF2553EF7800EC6710 /* TestDoubles */,
+				45F0038B2553E623009733D0 /* TestCase.swift */,
 				45F003602553E076009733D0 /* Info.plist */,
+				45F0039D2553E81E009733D0 /* Presentation */,
 			);
 			path = SimpleRedditClientTests;
 			sourceTree = "<group>";
@@ -126,6 +227,78 @@
 				45F0036B2553E076009733D0 /* Info.plist */,
 			);
 			path = SimpleRedditClientUITests;
+			sourceTree = "<group>";
+		};
+		45F0037D2553E59E009733D0 /* TopList */ = {
+			isa = PBXGroup;
+			children = (
+				45F0034B2553E073009733D0 /* TopEntryListViewController.swift */,
+				45F003812553E5B5009733D0 /* TopEntryListPresenter.swift */,
+			);
+			path = TopList;
+			sourceTree = "<group>";
+		};
+		45F003902553E7A2009733D0 /* Presentation */ = {
+			isa = PBXGroup;
+			children = (
+				4580EBCE2556D23E009F443E /* Formatters */,
+				45F003C92556B6D5009733D0 /* Storyboard */,
+				4580EBDC2556D5C3009F443E /* Scenes */,
+			);
+			path = Presentation;
+			sourceTree = "<group>";
+		};
+		45F003942553E7BB009733D0 /* Data */ = {
+			isa = PBXGroup;
+			children = (
+				45F003952553E7C9009733D0 /* TopEntryGateway.swift */,
+			);
+			path = Data;
+			sourceTree = "<group>";
+		};
+		45F0039D2553E81E009733D0 /* Presentation */ = {
+			isa = PBXGroup;
+			children = (
+				4580EBEE2556D60A009F443E /* Formatters */,
+				4580EBE72556D5F7009F443E /* Scenes */,
+			);
+			path = Presentation;
+			sourceTree = "<group>";
+		};
+		45F003A42553E828009733D0 /* TestDoubles */ = {
+			isa = PBXGroup;
+			children = (
+				458E7EBC2556C61400F99A2C /* TopEntryListViewMock.swift */,
+				458E7EC12556C79200F99A2C /* TopEntryListViewDummy.swift */,
+			);
+			path = TestDoubles;
+			sourceTree = "<group>";
+		};
+		45F003B72553ECBA009733D0 /* Domain */ = {
+			isa = PBXGroup;
+			children = (
+				45F003B82553ECCA009733D0 /* TopEntry.swift */,
+			);
+			path = Domain;
+			sourceTree = "<group>";
+		};
+		45F003C92556B6D5009733D0 /* Storyboard */ = {
+			isa = PBXGroup;
+			children = (
+				45F0034D2553E073009733D0 /* Main.storyboard */,
+				45F003522553E075009733D0 /* LaunchScreen.storyboard */,
+			);
+			path = Storyboard;
+			sourceTree = "<group>";
+		};
+		45F003CA2556B6F3009733D0 /* System */ = {
+			isa = PBXGroup;
+			children = (
+				45F003472553E073009733D0 /* AppDelegate.swift */,
+				45F003492553E073009733D0 /* SceneDelegate.swift */,
+				45F003552553E075009733D0 /* Info.plist */,
+			);
+			path = System;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -258,8 +431,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				45F0034C2553E073009733D0 /* ViewController.swift in Sources */,
+				4580EBD02556D252009F443E /* ErrorFormatter.swift in Sources */,
+				45F003822553E5B5009733D0 /* TopEntryListPresenter.swift in Sources */,
+				45F0034C2553E073009733D0 /* TopEntryListViewController.swift in Sources */,
 				45F003482553E073009733D0 /* AppDelegate.swift in Sources */,
+				4580EBD82556D586009F443E /* TopEntryAuthorInfoFormatter.swift in Sources */,
+				45F003B92553ECCA009733D0 /* TopEntry.swift in Sources */,
+				45F003962553E7C9009733D0 /* TopEntryGateway.swift in Sources */,
 				45F0034A2553E073009733D0 /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -268,7 +446,17 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				45F0035F2553E076009733D0 /* SimpleRedditClientTests.swift in Sources */,
+				45F003B32553EC93009733D0 /* TopEntryGatewayFetchSuccessfullyStub.swift in Sources */,
+				45F003872553E611009733D0 /* TopListPresenterTests.swift in Sources */,
+				45F003A62553E83C009733D0 /* TopEntryGatewayDummy.swift in Sources */,
+				4580EBC52556CBCE009F443E /* TopEntryGatewayFetchFailingStub.swift in Sources */,
+				458E7EBD2556C61400F99A2C /* TopEntryListViewMock.swift in Sources */,
+				45B4F7D12553EF9B00EC6710 /* Top+Stubs.swift in Sources */,
+				4580EBCA2556CC09009F443E /* TestError.swift in Sources */,
+				4580EBF02556D61A009F443E /* TopEntryAuthorInfoFormatterTests.swift in Sources */,
+				45F003AE2553E8AA009733D0 /* TopEntryGatewayMock.swift in Sources */,
+				458E7EC22556C79200F99A2C /* TopEntryListViewDummy.swift in Sources */,
+				45F0038C2553E623009733D0 /* TestCase.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -438,7 +626,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 84EM6X42M4;
-				INFOPLIST_FILE = SimpleRedditClient/Info.plist;
+				INFOPLIST_FILE = "$(SRCROOT)/SimpleRedditClient/System/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -457,7 +645,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 84EM6X42M4;
-				INFOPLIST_FILE = SimpleRedditClient/Info.plist;
+				INFOPLIST_FILE = "$(SRCROOT)/SimpleRedditClient/System/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
