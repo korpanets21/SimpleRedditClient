@@ -7,11 +7,15 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		4505B1832557B09F00E23F3E /* URLRequestBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4505B1822557B09F00E23F3E /* URLRequestBuilder.swift */; };
 		4580EBC52556CBCE009F443E /* TopEntryGatewayFetchFailingStub.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4580EBC42556CBCE009F443E /* TopEntryGatewayFetchFailingStub.swift */; };
 		4580EBCA2556CC09009F443E /* TestError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4580EBC92556CC09009F443E /* TestError.swift */; };
 		4580EBD02556D252009F443E /* ErrorFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4580EBCF2556D252009F443E /* ErrorFormatter.swift */; };
 		4580EBD82556D586009F443E /* TopEntryAuthorInfoFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4580EBD72556D586009F443E /* TopEntryAuthorInfoFormatter.swift */; };
 		4580EBF02556D61A009F443E /* TopEntryAuthorInfoFormatterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4580EBEF2556D61A009F443E /* TopEntryAuthorInfoFormatterTests.swift */; };
+		4580EC0D2556EC99009F443E /* RestClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4580EC0C2556EC99009F443E /* RestClient.swift */; };
+		4580EC1E2556F09E009F443E /* EntityGateway.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4580EC1D2556F09E009F443E /* EntityGateway.swift */; };
+		4580EC302556F8BC009F443E /* Listing.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4580EC2F2556F8BC009F443E /* Listing.swift */; };
 		458E7EBD2556C61400F99A2C /* TopEntryListViewMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 458E7EBC2556C61400F99A2C /* TopEntryListViewMock.swift */; };
 		458E7EC22556C79200F99A2C /* TopEntryListViewDummy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 458E7EC12556C79200F99A2C /* TopEntryListViewDummy.swift */; };
 		45B4F7D12553EF9B00EC6710 /* Top+Stubs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45B4F7D02553EF9B00EC6710 /* Top+Stubs.swift */; };
@@ -50,11 +54,15 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		4505B1822557B09F00E23F3E /* URLRequestBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLRequestBuilder.swift; sourceTree = "<group>"; };
 		4580EBC42556CBCE009F443E /* TopEntryGatewayFetchFailingStub.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopEntryGatewayFetchFailingStub.swift; sourceTree = "<group>"; };
 		4580EBC92556CC09009F443E /* TestError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestError.swift; sourceTree = "<group>"; };
 		4580EBCF2556D252009F443E /* ErrorFormatter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorFormatter.swift; sourceTree = "<group>"; };
 		4580EBD72556D586009F443E /* TopEntryAuthorInfoFormatter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopEntryAuthorInfoFormatter.swift; sourceTree = "<group>"; };
 		4580EBEF2556D61A009F443E /* TopEntryAuthorInfoFormatterTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopEntryAuthorInfoFormatterTests.swift; sourceTree = "<group>"; };
+		4580EC0C2556EC99009F443E /* RestClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestClient.swift; sourceTree = "<group>"; };
+		4580EC1D2556F09E009F443E /* EntityGateway.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EntityGateway.swift; sourceTree = "<group>"; };
+		4580EC2F2556F8BC009F443E /* Listing.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Listing.swift; sourceTree = "<group>"; };
 		458E7EBC2556C61400F99A2C /* TopEntryListViewMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopEntryListViewMock.swift; sourceTree = "<group>"; };
 		458E7EC12556C79200F99A2C /* TopEntryListViewDummy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopEntryListViewDummy.swift; sourceTree = "<group>"; };
 		45B4F7D02553EF9B00EC6710 /* Top+Stubs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Top+Stubs.swift"; sourceTree = "<group>"; };
@@ -146,6 +154,25 @@
 				4580EBEF2556D61A009F443E /* TopEntryAuthorInfoFormatterTests.swift */,
 			);
 			path = Formatters;
+			sourceTree = "<group>";
+		};
+		4580EC252556F87E009F443E /* Gateways */ = {
+			isa = PBXGroup;
+			children = (
+				4580EC2E2556F8AF009F443E /* ServerDataModels */,
+				45F003952553E7C9009733D0 /* TopEntryGateway.swift */,
+				4580EC1D2556F09E009F443E /* EntityGateway.swift */,
+				4505B1822557B09F00E23F3E /* URLRequestBuilder.swift */,
+			);
+			path = Gateways;
+			sourceTree = "<group>";
+		};
+		4580EC2E2556F8AF009F443E /* ServerDataModels */ = {
+			isa = PBXGroup;
+			children = (
+				4580EC2F2556F8BC009F443E /* Listing.swift */,
+			);
+			path = ServerDataModels;
 			sourceTree = "<group>";
 		};
 		458E7EAD2556B7A400F99A2C /* Resources */ = {
@@ -251,7 +278,8 @@
 		45F003942553E7BB009733D0 /* Data */ = {
 			isa = PBXGroup;
 			children = (
-				45F003952553E7C9009733D0 /* TopEntryGateway.swift */,
+				4580EC252556F87E009F443E /* Gateways */,
+				4580EC0C2556EC99009F443E /* RestClient.swift */,
 			);
 			path = Data;
 			sourceTree = "<group>";
@@ -434,11 +462,15 @@
 				4580EBD02556D252009F443E /* ErrorFormatter.swift in Sources */,
 				45F003822553E5B5009733D0 /* TopEntryListPresenter.swift in Sources */,
 				45F0034C2553E073009733D0 /* TopEntryListViewController.swift in Sources */,
+				4580EC302556F8BC009F443E /* Listing.swift in Sources */,
 				45F003482553E073009733D0 /* AppDelegate.swift in Sources */,
+				4505B1832557B09F00E23F3E /* URLRequestBuilder.swift in Sources */,
 				4580EBD82556D586009F443E /* TopEntryAuthorInfoFormatter.swift in Sources */,
 				45F003B92553ECCA009733D0 /* TopEntry.swift in Sources */,
 				45F003962553E7C9009733D0 /* TopEntryGateway.swift in Sources */,
+				4580EC0D2556EC99009F443E /* RestClient.swift in Sources */,
 				45F0034A2553E073009733D0 /* SceneDelegate.swift in Sources */,
+				4580EC1E2556F09E009F443E /* EntityGateway.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

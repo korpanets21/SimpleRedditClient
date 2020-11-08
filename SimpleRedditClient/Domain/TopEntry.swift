@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct TopEntry {
+struct TopEntry: Decodable {
 
     let id: String
     let title: String
@@ -15,5 +15,18 @@ struct TopEntry {
     let entryDate: Date
     let thumbnailURL: URL?
     let commentsCount: Int
+
+}
+
+extension TopEntry {
+
+    enum CodingKeys: String, CodingKey {
+        case id
+        case title
+        case author
+        case entryDate = "created_utc"
+        case thumbnailURL = "thumbnail"
+        case commentsCount = "num_comments"
+    }
 
 }

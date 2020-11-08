@@ -9,8 +9,11 @@ import UIKit
 
 class TopEntryListViewController: UIViewController {
 
+    var presenter: TopEntryListPresenter?
+
     override func viewDidLoad() {
         super.viewDidLoad()
+        presenter?.viewLoaded()
     }
 
 }

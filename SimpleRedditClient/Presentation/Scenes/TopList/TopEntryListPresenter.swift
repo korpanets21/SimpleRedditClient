@@ -32,10 +32,11 @@ struct TopEntryViewModel: Hashable {
 
 }
 
-final class TopListPresenterImpl: TopEntryListPresenter {
+final class TopEntryListPresenterImpl: TopEntryListPresenter {
+
+    weak var view: TopEntryListView?
 
     private let gateway: TopEntryGateway
-    weak var view: TopEntryListView?
     private lazy var authorInfoFormatter = TopEntryAuthorInfoFormatter()
 
     init(_ gateway: TopEntryGateway) {
