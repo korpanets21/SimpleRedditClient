@@ -74,7 +74,8 @@ final class TopListPresenterTests: TestCase {
         viewMock.clear()
         presenter.willDisplayItem(makeViewModel(for: .stub1))
         viewMock.verifyCalled(.showItems)
-        viewMock.verifyContains(gatewayStub.items.map({ makeViewModel(for: $0) }))
+        let totalList = gatewayStub.items + gatewayStub.items
+        viewMock.verifyContains(totalList.map({ makeViewModel(for: $0) }))
     }
 
     func testWhenFailedToFetchMoreThenShouldCallShowErrorMessage() {

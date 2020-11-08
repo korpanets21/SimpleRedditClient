@@ -7,12 +7,23 @@
 
 import UIKit
 
+protocol TopEntryListPresenter {
+
+    typealias RefreshCompletion = () -> Void
+
+    func viewLoaded()
+    func refresh(completion: @escaping RefreshCompletion)
+    func willDisplayItem(_ viewModel: TopEntryViewModel)
+
+}
+
 class TopEntryListViewController: UIViewController {
 
     var presenter: TopEntryListPresenter?
 
     @IBOutlet private var tableView: UITableView!
     private var dataSource: UITableViewDiffableDataSource<Section, TopEntryViewModel>?
+    private lazy var refreshControl = self.makeRefreshControl()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -24,6 +35,7 @@ class TopEntryListViewController: UIViewController {
     private func setupTableView() {
         tableView.registerCellNibs(for: [TopEntryTableViewCell.self])
         tableView.delegate = self
+        tableView.refreshControl = refreshControl
     }
 
     private func setupDataSource() {
@@ -35,15 +47,27 @@ class TopEntryListViewController: UIViewController {
                                                    })
     }
 
+    private func makeRefreshControl() -> UIRefreshControl {
+        let control = UIRefreshControl()
+        control.addTarget(self, action: #selector(refreshAction), for: .valueChanged)
+        return control
+    }
+
+    @objc private func refreshAction() {
+        presenter?.refresh { [weak self] in
+            if self?.refreshControl.isRefreshing == true {
+                self?.refreshControl.endRefreshing()
+            }
+        }
+    }
+
 }
 
 extension TopEntryListViewController: TopEntryListView {
 
     func show(items: [TopEntryViewModel]) {
-        var snapshot = dataSource?.snapshot() ?? NSDiffableDataSourceSnapshot()
-        if snapshot.numberOfSections == 0 {
-            snapshot.appendSections([.topEntries])
-        }
+        var snapshot = NSDiffableDataSourceSnapshot<Section, TopEntryViewModel>()
+        snapshot.appendSections([.topEntries])
         snapshot.appendItems(items, toSection: .topEntries)
         dataSource?.apply(snapshot)
     }

@@ -7,13 +7,6 @@
 
 import Foundation
 
-protocol TopEntryListPresenter {
-
-    func viewLoaded()
-    func willDisplayItem(_ viewModel: TopEntryViewModel)
-
-}
-
 protocol TopEntryListView: AnyObject {
 
     func show(items: [TopEntryViewModel])
@@ -59,6 +52,14 @@ final class TopEntryListPresenterImpl: TopEntryListPresenter {
         })
     }
 
+    func refresh(completion: @escaping RefreshCompletion) {
+        gateway.fetch { [weak self] result in
+            self?.topEntries = []
+            self?.handle(result)
+            completion()
+        }
+    }
+
     func willDisplayItem(_ viewModel: TopEntryViewModel) {
         guard viewModel.id == topEntries[topEntries.count - 3].id else { return }
         gateway.fetchMore { [weak self] result in
@@ -70,7 +71,7 @@ final class TopEntryListPresenterImpl: TopEntryListPresenter {
         switch result {
         case .success(let topEntries):
             self.topEntries += topEntries
-            show(items: topEntries)
+            show(items: self.topEntries)
         case .failure(let error):
             show(error: error)
         }
