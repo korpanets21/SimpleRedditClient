@@ -14,7 +14,7 @@ final class TopListPresenterTests: TestCase {
         let gatewayMock = TopEntryGatewayMock()
         let presenter = makeInstance(gateway: gatewayMock)
         presenter.viewLoaded()
-        gatewayMock.verifyCalled(.fetchMore)
+        gatewayMock.verifyCalled(.fetch)
     }
 
     func testWhenFetchedTopEntitiesThenShouldCallShowOnView() {
@@ -30,7 +30,7 @@ final class TopListPresenterTests: TestCase {
         let gatewayStub = TopEntryGatewayFetchSuccessfullyStub()
         let presenter = makeInstance(gateway: gatewayStub, view: viewMock)
         presenter.viewLoaded()
-        let expectedViewModels = [gatewayStub.entity].map({ makeViewModel(for: $0) })
+        let expectedViewModels = gatewayStub.items.map({ makeViewModel(for: $0) })
         viewMock.verifyContains(expectedViewModels)
     }
 
@@ -50,6 +50,44 @@ final class TopListPresenterTests: TestCase {
         viewMock.verifyMessageFormat(gatewayStub.error.localizedDescription)
     }
 
+    func testWhenIsDisplayingAntepenultimateItemThenFetchMore() {
+        let entries: [TopEntry] = [.stub0, .stub1, .stub2, .stub3]
+        let (presenter, gatewayStub) = makeInstanceWithGatewayStub(entries: entries)
+        gatewayStub.clear()
+        presenter.willDisplayItem(makeViewModel(for: .stub1))
+        gatewayStub.verifyCalled(.fetchMore)
+    }
+
+    func testWhenIsDisplayingNotAnAntepenultimateItemThenDoNotFetchMore() {
+        let entries: [TopEntry] = [.stub0, .stub1, .stub2, .stub3]
+        let (presenter, gatewayStub) = makeInstanceWithGatewayStub(entries: entries)
+        gatewayStub.clear()
+        presenter.willDisplayItem(makeViewModel(for: .stub0))
+        presenter.willDisplayItem(makeViewModel(for: .stub2))
+        presenter.willDisplayItem(makeViewModel(for: .stub3))
+        gatewayStub.verifyWasNotCalled()
+    }
+
+    func testWhenFetchedMoreThenShouldCallShowOnView() {
+        let viewMock = TopEntryListViewMock()
+        let (presenter, gatewayStub) = makeInstanceWithGatewayStub(view: viewMock, entries: [.stub1, .stub2, .stub3])
+        viewMock.clear()
+        presenter.willDisplayItem(makeViewModel(for: .stub1))
+        viewMock.verifyCalled(.showItems)
+        viewMock.verifyContains(gatewayStub.items.map({ makeViewModel(for: $0) }))
+    }
+
+    func testWhenFailedToFetchMoreThenShouldCallShowErrorMessage() {
+        let viewMock = TopEntryListViewMock()
+        let gatewayStub = TopEntryGatewayFetchMoreFailingStub([.stub1, .stub2, .stub3])
+        let presenter = makeInstance(gateway: gatewayStub, view: viewMock)
+        presenter.viewLoaded()
+        viewMock.clear()
+        presenter.willDisplayItem(makeViewModel(for: .stub1))
+        viewMock.verifyCalled(.showAlertWithMessage)
+        viewMock.verifyMessageFormat(gatewayStub.error.localizedDescription)
+    }
+
 }
 
 private extension TopListPresenterTests {
@@ -59,6 +97,14 @@ private extension TopListPresenterTests {
         let presenter = TopEntryListPresenterImpl(gateway)
         presenter.view = view
         return presenter
+    }
+
+    func makeInstanceWithGatewayStub(view: TopEntryListView = TopEntryListViewDummy(),
+                                     entries: [TopEntry] = [.stub0]) -> (TopEntryListPresenterImpl, TopEntryGatewayFetchSuccessfullyStub) {
+        let gatewayStub = TopEntryGatewayFetchSuccessfullyStub(entries)
+        let presenter = makeInstance(gateway: gatewayStub, view: view)
+        presenter.viewLoaded()
+        return (presenter, gatewayStub)
     }
 }
 

@@ -10,6 +10,7 @@ import Foundation
 protocol TopEntryListPresenter {
 
     func viewLoaded()
+    func willDisplayItem(_ viewModel: TopEntryViewModel)
 
 }
 
@@ -30,6 +31,14 @@ struct TopEntryViewModel: Hashable {
     let thumbnail: Data?
     let commentsCount: String
 
+    func hash(into hasher: inout Hasher) {
+        hasher.combine(id)
+    }
+
+    static func == (lhs: TopEntryViewModel, rhs: TopEntryViewModel) -> Bool {
+        return lhs.id == rhs.id
+    }
+
 }
 
 final class TopEntryListPresenterImpl: TopEntryListPresenter {
@@ -38,20 +47,33 @@ final class TopEntryListPresenterImpl: TopEntryListPresenter {
 
     private let gateway: TopEntryGateway
     private lazy var authorInfoFormatter = TopEntryAuthorInfoFormatter()
+    private var topEntries: [TopEntry] = []
 
     init(_ gateway: TopEntryGateway) {
         self.gateway = gateway
     }
 
     func viewLoaded() {
-        gateway.fetchMore(completion: { [weak self] result in
-            switch result {
-            case .success(let topEntries):
-                self?.show(items: topEntries)
-            case .failure(let error):
-                self?.show(error: error)
-            }
+        gateway.fetch(completion: { [weak self] result in
+            self?.handle(result)
         })
+    }
+
+    func willDisplayItem(_ viewModel: TopEntryViewModel) {
+        guard viewModel.id == topEntries[topEntries.count - 3].id else { return }
+        gateway.fetchMore { [weak self] result in
+            self?.handle(result)
+        }
+    }
+
+    private func handle(_ result: Result<[TopEntry], Error>) {
+        switch result {
+        case .success(let topEntries):
+            self.topEntries += topEntries
+            show(items: topEntries)
+        case .failure(let error):
+            show(error: error)
+        }
     }
 
     private func show(error: Error) {

@@ -8,22 +8,34 @@
 import XCTest
 @testable import SimpleRedditClient
 
-final class TopEntryGatewayMock: TopEntryGateway {
-
+class TopEntryGatewayMock: TopEntryGateway {
+    
     private var log: [Action] = []
 
-    func fetchMore(completion: (Result<[TopEntry], Error>) -> Void) {
+    func fetch(completion: @escaping TopEntryGatewayFetchCompletion) {
+        log.append(.fetch)
+    }
+    func fetchMore(completion: @escaping TopEntryGatewayFetchCompletion) {
         log.append(.fetchMore)
     }
 
     func verifyCalled(_ action: Action) {
         XCTAssertEqual([action], log)
     }
+
+    func verifyWasNotCalled() {
+        XCTAssertTrue(log.isEmpty)
+    }
+
+    func clear() {
+        log = []
+    }
 }
 
 extension TopEntryGatewayMock {
 
     enum Action {
+        case fetch
         case fetchMore
     }
 

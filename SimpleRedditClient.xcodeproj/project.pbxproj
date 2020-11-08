@@ -13,6 +13,7 @@
 		4505B19B2557BA7800E23F3E /* TopEntryTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4505B1992557BA7800E23F3E /* TopEntryTableViewCell.swift */; };
 		4505B19C2557BA7800E23F3E /* TopEntryTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4505B19A2557BA7800E23F3E /* TopEntryTableViewCell.xib */; };
 		4505B1A52557BD2C00E23F3E /* TableView+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4505B1A42557BD2C00E23F3E /* TableView+Extensions.swift */; };
+		4505B1AA255805DE00E23F3E /* TopEntryGatewayFetchMoreFailingStub.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4505B1A9255805DE00E23F3E /* TopEntryGatewayFetchMoreFailingStub.swift */; };
 		4580EBC52556CBCE009F443E /* TopEntryGatewayFetchFailingStub.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4580EBC42556CBCE009F443E /* TopEntryGatewayFetchFailingStub.swift */; };
 		4580EBCA2556CC09009F443E /* TestError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4580EBC92556CC09009F443E /* TestError.swift */; };
 		4580EBD02556D252009F443E /* ErrorFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4580EBCF2556D252009F443E /* ErrorFormatter.swift */; };
@@ -65,6 +66,7 @@
 		4505B1992557BA7800E23F3E /* TopEntryTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopEntryTableViewCell.swift; sourceTree = "<group>"; };
 		4505B19A2557BA7800E23F3E /* TopEntryTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TopEntryTableViewCell.xib; sourceTree = "<group>"; };
 		4505B1A42557BD2C00E23F3E /* TableView+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TableView+Extensions.swift"; sourceTree = "<group>"; };
+		4505B1A9255805DE00E23F3E /* TopEntryGatewayFetchMoreFailingStub.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopEntryGatewayFetchMoreFailingStub.swift; sourceTree = "<group>"; };
 		4580EBC42556CBCE009F443E /* TopEntryGatewayFetchFailingStub.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopEntryGatewayFetchFailingStub.swift; sourceTree = "<group>"; };
 		4580EBC92556CC09009F443E /* TestError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestError.swift; sourceTree = "<group>"; };
 		4580EBCF2556D252009F443E /* ErrorFormatter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorFormatter.swift; sourceTree = "<group>"; };
@@ -227,6 +229,7 @@
 				45F003AD2553E8AA009733D0 /* TopEntryGatewayMock.swift */,
 				45F003B22553EC93009733D0 /* TopEntryGatewayFetchSuccessfullyStub.swift */,
 				4580EBC42556CBCE009F443E /* TopEntryGatewayFetchFailingStub.swift */,
+				4505B1A9255805DE00E23F3E /* TopEntryGatewayFetchMoreFailingStub.swift */,
 			);
 			path = TopEntryGateway;
 			sourceTree = "<group>";
@@ -530,6 +533,7 @@
 				45B4F7D12553EF9B00EC6710 /* Top+Stubs.swift in Sources */,
 				4580EBCA2556CC09009F443E /* TestError.swift in Sources */,
 				4580EBF02556D61A009F443E /* TopEntryAuthorInfoFormatterTests.swift in Sources */,
+				4505B1AA255805DE00E23F3E /* TopEntryGatewayFetchMoreFailingStub.swift in Sources */,
 				45F003AE2553E8AA009733D0 /* TopEntryGatewayMock.swift in Sources */,
 				458E7EC22556C79200F99A2C /* TopEntryListViewDummy.swift in Sources */,
 				45F0038C2553E623009733D0 /* TestCase.swift in Sources */,

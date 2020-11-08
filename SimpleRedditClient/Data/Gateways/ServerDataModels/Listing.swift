@@ -11,12 +11,14 @@ struct Listing<T: Decodable>: Decodable {
 
     let count: Int
     let children: [ListingElementWrapper<T>]
+    let next: String?
 
     init(from decoder: Decoder) throws {
         let wrapper = try decoder.container(keyedBy: CodingKeys.self)
         let values = try wrapper.nestedContainer(keyedBy: EmbeddedKeys.self, forKey: .data)
         count = try values.decode(Int.self, forKey: .count)
         children = try values.decode([ListingElementWrapper].self, forKey: .children)
+        next = try values.decode(String.self, forKey: .next)
     }
 
     enum CodingKeys: String, CodingKey {
@@ -25,6 +27,7 @@ struct Listing<T: Decodable>: Decodable {
     enum EmbeddedKeys: String, CodingKey {
         case count = "dist"
         case children
+        case next = "after"
     }
 
 }

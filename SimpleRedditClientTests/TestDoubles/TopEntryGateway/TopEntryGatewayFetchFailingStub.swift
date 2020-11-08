@@ -7,11 +7,11 @@
 
 @testable import SimpleRedditClient
 
-final class TopEntryGatewayFetchFailingStub: TopEntryGateway {
+final class TopEntryGatewayFetchFailingStub: TopEntryGatewayDummy {
 
     let error = TestError.default
 
-    func fetchMore(completion: (Result<[TopEntry], Error>) -> Void) {
+    override func fetch(completion: @escaping TopEntryGatewayFetchCompletion) {
         completion(.failure(error))
     }
 

@@ -7,12 +7,22 @@
 
 @testable import SimpleRedditClient
 
-final class TopEntryGatewayFetchSuccessfullyStub: TopEntryGateway {
+final class TopEntryGatewayFetchSuccessfullyStub: TopEntryGatewayMock {
 
-    let entity = TopEntry.stub0
+    let items: [TopEntry]
 
-    func fetchMore(completion: (Result<[TopEntry], Error>) -> Void) {
-        completion(.success([entity]))
+    init(_ items: [TopEntry] = [.stub0]) {
+        self.items = items
+    }
+
+    override func fetch(completion: @escaping TopEntryGatewayFetchCompletion) {
+        super.fetch(completion: completion)
+        completion(.success(items))
+    }
+
+    override func fetchMore(completion: @escaping TopEntryGatewayFetchCompletion) {
+        super.fetchMore(completion: completion)
+        completion(.success(items))
     }
 
 }

@@ -8,7 +8,7 @@
 import XCTest
 @testable import SimpleRedditClient
 
-final class TopEntryAuthorInfoFormatterTests: XCTestCase {
+final class TopEntryAuthorInfoFormatterTests: TestCase {
 
     func testInfoStringForAnEntryCreatedOneHourAgo() {
         let topEntry = TopEntry.stubCreatedAnHourAgo

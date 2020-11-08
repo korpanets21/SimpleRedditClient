@@ -23,6 +23,7 @@ class TopEntryListViewController: UIViewController {
 
     private func setupTableView() {
         tableView.registerCellNibs(for: [TopEntryTableViewCell.self])
+        tableView.delegate = self
     }
 
     private func setupDataSource() {
@@ -39,8 +40,10 @@ class TopEntryListViewController: UIViewController {
 extension TopEntryListViewController: TopEntryListView {
 
     func show(items: [TopEntryViewModel]) {
-        var snapshot = NSDiffableDataSourceSnapshot<Section, TopEntryViewModel>()
-        snapshot.appendSections([.topEntries])
+        var snapshot = dataSource?.snapshot() ?? NSDiffableDataSourceSnapshot()
+        if snapshot.numberOfSections == 0 {
+            snapshot.appendSections([.topEntries])
+        }
         snapshot.appendItems(items, toSection: .topEntries)
         dataSource?.apply(snapshot)
     }
@@ -51,6 +54,15 @@ extension TopEntryListViewController: TopEntryListView {
         present(alert, animated: true, completion: nil)
     }
 
+}
+
+extension TopEntryListViewController: UITableViewDelegate {
+    func tableView(_ tableView: UITableView,
+                   willDisplay cell: UITableViewCell,
+                   forRowAt indexPath: IndexPath) {
+        guard let viewModel = dataSource?.itemIdentifier(for: indexPath) else { return }
+        presenter?.willDisplayItem(viewModel)
+    }
 }
 
 extension TopEntryListViewController {

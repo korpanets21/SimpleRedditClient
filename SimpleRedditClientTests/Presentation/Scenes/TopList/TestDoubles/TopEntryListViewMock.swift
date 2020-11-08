@@ -36,6 +36,12 @@ final class TopEntryListViewMock: TopEntryListView {
         XCTAssertEqual(expectedMessage, message)
     }
 
+    func clear() {
+        log = []
+        items = []
+        message = ""
+    }
+
 }
 
 extension TopEntryListViewMock {

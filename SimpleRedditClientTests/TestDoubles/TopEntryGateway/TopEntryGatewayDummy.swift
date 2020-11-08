@@ -7,8 +7,9 @@
 
 @testable import SimpleRedditClient
 
-final class TopEntryGatewayDummy: TopEntryGateway {
+class TopEntryGatewayDummy: TopEntryGateway {
 
+    func fetch(completion: @escaping TopEntryGatewayFetchCompletion) { }
     func fetchMore(completion: (Result<[TopEntry], Error>) -> Void) { }
-    
+
 }
