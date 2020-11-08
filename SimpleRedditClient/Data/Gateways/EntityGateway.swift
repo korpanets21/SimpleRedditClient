@@ -71,7 +71,9 @@ class EntityGateway {
 
     private func map<T: Decodable>(_ json: Data) throws -> T {
         do {
-            return try JSONDecoder().decode(T.self, from: json)
+            let decoder = JSONDecoder()
+            decoder.dateDecodingStrategy = .secondsSince1970
+            return try decoder.decode(T.self, from: json)
         } catch {
             throw EntityGatewayError.mappingFailed
         }
