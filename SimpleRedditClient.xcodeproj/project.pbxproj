@@ -14,6 +14,10 @@
 		4505B19C2557BA7800E23F3E /* TopEntryTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4505B19A2557BA7800E23F3E /* TopEntryTableViewCell.xib */; };
 		4505B1A52557BD2C00E23F3E /* TableView+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4505B1A42557BD2C00E23F3E /* TableView+Extensions.swift */; };
 		4505B1AA255805DE00E23F3E /* TopEntryGatewayFetchMoreFailingStub.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4505B1A9255805DE00E23F3E /* TopEntryGatewayFetchMoreFailingStub.swift */; };
+		4505B1B725581BBF00E23F3E /* CancellationToken.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4505B1B625581BBF00E23F3E /* CancellationToken.swift */; };
+		4505B1C425581C3600E23F3E /* ImageGateway.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4505B1C325581C3600E23F3E /* ImageGateway.swift */; };
+		4505B1CB2558381700E23F3E /* ImageRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4505B1CA2558381700E23F3E /* ImageRepository.swift */; };
+		4505B1D12558417500E23F3E /* ImageRepositoryDummy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4505B1D02558417500E23F3E /* ImageRepositoryDummy.swift */; };
 		4580EBC52556CBCE009F443E /* TopEntryGatewayFetchFailingStub.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4580EBC42556CBCE009F443E /* TopEntryGatewayFetchFailingStub.swift */; };
 		4580EBCA2556CC09009F443E /* TestError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4580EBC92556CC09009F443E /* TestError.swift */; };
 		4580EBD02556D252009F443E /* ErrorFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4580EBCF2556D252009F443E /* ErrorFormatter.swift */; };
@@ -67,6 +71,10 @@
 		4505B19A2557BA7800E23F3E /* TopEntryTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TopEntryTableViewCell.xib; sourceTree = "<group>"; };
 		4505B1A42557BD2C00E23F3E /* TableView+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TableView+Extensions.swift"; sourceTree = "<group>"; };
 		4505B1A9255805DE00E23F3E /* TopEntryGatewayFetchMoreFailingStub.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopEntryGatewayFetchMoreFailingStub.swift; sourceTree = "<group>"; };
+		4505B1B625581BBF00E23F3E /* CancellationToken.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CancellationToken.swift; sourceTree = "<group>"; };
+		4505B1C325581C3600E23F3E /* ImageGateway.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageGateway.swift; sourceTree = "<group>"; };
+		4505B1CA2558381700E23F3E /* ImageRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageRepository.swift; sourceTree = "<group>"; };
+		4505B1D02558417500E23F3E /* ImageRepositoryDummy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageRepositoryDummy.swift; sourceTree = "<group>"; };
 		4580EBC42556CBCE009F443E /* TopEntryGatewayFetchFailingStub.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopEntryGatewayFetchFailingStub.swift; sourceTree = "<group>"; };
 		4580EBC92556CC09009F443E /* TestError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestError.swift; sourceTree = "<group>"; };
 		4580EBCF2556D252009F443E /* ErrorFormatter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorFormatter.swift; sourceTree = "<group>"; };
@@ -153,6 +161,48 @@
 			path = TopEntryTableViewCell;
 			sourceTree = "<group>";
 		};
+		4505B1B125581BA300E23F3E /* Core */ = {
+			isa = PBXGroup;
+			children = (
+				45F003B72553ECBA009733D0 /* Domain */,
+				4505B1B525581BAA00E23F3E /* Application */,
+			);
+			path = Core;
+			sourceTree = "<group>";
+		};
+		4505B1B525581BAA00E23F3E /* Application */ = {
+			isa = PBXGroup;
+			children = (
+				4505B1B625581BBF00E23F3E /* CancellationToken.swift */,
+			);
+			path = Application;
+			sourceTree = "<group>";
+		};
+		4505B1BF25581C2200E23F3E /* EntityGateway */ = {
+			isa = PBXGroup;
+			children = (
+				4580EC1D2556F09E009F443E /* EntityGateway.swift */,
+				4505B1822557B09F00E23F3E /* URLRequestBuilder.swift */,
+			);
+			path = EntityGateway;
+			sourceTree = "<group>";
+		};
+		4505B1C8255837FB00E23F3E /* Repositories */ = {
+			isa = PBXGroup;
+			children = (
+				4505B1CA2558381700E23F3E /* ImageRepository.swift */,
+			);
+			path = Repositories;
+			sourceTree = "<group>";
+		};
+		4505B1CF2558416B00E23F3E /* ImageRepository */ = {
+			isa = PBXGroup;
+			children = (
+				4505B1D02558417500E23F3E /* ImageRepositoryDummy.swift */,
+			);
+			path = ImageRepository;
+			sourceTree = "<group>";
+		};
 		4580EBCE2556D23E009F443E /* Formatters */ = {
 			isa = PBXGroup;
 			children = (
@@ -200,8 +250,8 @@
 			children = (
 				4580EC2E2556F8AF009F443E /* ServerDataModels */,
 				45F003952553E7C9009733D0 /* TopEntryGateway.swift */,
-				4580EC1D2556F09E009F443E /* EntityGateway.swift */,
-				4505B1822557B09F00E23F3E /* URLRequestBuilder.swift */,
+				4505B1BF25581C2200E23F3E /* EntityGateway */,
+				4505B1C325581C3600E23F3E /* ImageGateway.swift */,
 			);
 			path = Gateways;
 			sourceTree = "<group>";
@@ -237,6 +287,7 @@
 		45B4F7CF2553EF7800EC6710 /* TestDoubles */ = {
 			isa = PBXGroup;
 			children = (
+				4505B1CF2558416B00E23F3E /* ImageRepository */,
 				458E7EC92556C7E700F99A2C /* TopEntryGateway */,
 				45B4F7D02553EF9B00EC6710 /* Top+Stubs.swift */,
 				4580EBC92556CC09009F443E /* TestError.swift */,
@@ -269,7 +320,7 @@
 			children = (
 				45F003CA2556B6F3009733D0 /* System */,
 				458E7EAD2556B7A400F99A2C /* Resources */,
-				45F003B72553ECBA009733D0 /* Domain */,
+				4505B1B125581BA300E23F3E /* Core */,
 				45F003942553E7BB009733D0 /* Data */,
 				45F003902553E7A2009733D0 /* Presentation */,
 			);
@@ -320,6 +371,7 @@
 		45F003942553E7BB009733D0 /* Data */ = {
 			isa = PBXGroup;
 			children = (
+				4505B1C8255837FB00E23F3E /* Repositories */,
 				4580EC252556F87E009F443E /* Gateways */,
 				4580EC0C2556EC99009F443E /* RestClient.swift */,
 			);
@@ -506,6 +558,7 @@
 				45F003822553E5B5009733D0 /* TopEntryListPresenter.swift in Sources */,
 				45F0034C2553E073009733D0 /* TopEntryListViewController.swift in Sources */,
 				4505B1A52557BD2C00E23F3E /* TableView+Extensions.swift in Sources */,
+				4505B1C425581C3600E23F3E /* ImageGateway.swift in Sources */,
 				4580EC302556F8BC009F443E /* Listing.swift in Sources */,
 				45F003482553E073009733D0 /* AppDelegate.swift in Sources */,
 				4505B1832557B09F00E23F3E /* URLRequestBuilder.swift in Sources */,
@@ -513,10 +566,12 @@
 				4580EBD82556D586009F443E /* TopEntryAuthorInfoFormatter.swift in Sources */,
 				45F003B92553ECCA009733D0 /* TopEntry.swift in Sources */,
 				45F003962553E7C9009733D0 /* TopEntryGateway.swift in Sources */,
+				4505B1B725581BBF00E23F3E /* CancellationToken.swift in Sources */,
 				4505B1882557B66900E23F3E /* TopEntryListSceneBuilder.swift in Sources */,
 				4580EC0D2556EC99009F443E /* RestClient.swift in Sources */,
 				45F0034A2553E073009733D0 /* SceneDelegate.swift in Sources */,
 				4505B19B2557BA7800E23F3E /* TopEntryTableViewCell.swift in Sources */,
+				4505B1CB2558381700E23F3E /* ImageRepository.swift in Sources */,
 				4580EC1E2556F09E009F443E /* EntityGateway.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -533,6 +588,7 @@
 				45B4F7D12553EF9B00EC6710 /* Top+Stubs.swift in Sources */,
 				4580EBCA2556CC09009F443E /* TestError.swift in Sources */,
 				4580EBF02556D61A009F443E /* TopEntryAuthorInfoFormatterTests.swift in Sources */,
+				4505B1D12558417500E23F3E /* ImageRepositoryDummy.swift in Sources */,
 				4505B1AA255805DE00E23F3E /* TopEntryGatewayFetchMoreFailingStub.swift in Sources */,
 				45F003AE2553E8AA009733D0 /* TopEntryGatewayMock.swift in Sources */,
 				458E7EC22556C79200F99A2C /* TopEntryListViewDummy.swift in Sources */,

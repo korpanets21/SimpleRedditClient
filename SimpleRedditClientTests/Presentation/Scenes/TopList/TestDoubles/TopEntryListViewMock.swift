@@ -19,6 +19,8 @@ final class TopEntryListViewMock: TopEntryListView {
         self.items = items
     }
 
+    func replace(oldItem: TopEntryViewModel, with newItem: TopEntryViewModel) { }
+
     func showAlertWith(message: String) {
         log.append(.showAlertWithMessage)
         self.message = message

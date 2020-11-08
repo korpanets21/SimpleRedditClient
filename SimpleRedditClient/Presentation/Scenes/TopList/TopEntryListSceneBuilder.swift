@@ -13,7 +13,9 @@ final class TopEntryListSceneBuilder {
         let viewController: TopEntryListViewController = UIStoryboard(.main).instantiateViewController()
         let restClient = RestClientImpl()
         let gateway = TopEntryGatewayImpl(restClient)
-        let presenter = TopEntryListPresenterImpl(gateway)
+        let imageGateway = ImageGatewayImpl(restClient)
+        let imageRepository = ImageRepositoryImpl(imageGateway)
+        let presenter = TopEntryListPresenterImpl(gateway, imageRepository)
         viewController.presenter = presenter
         presenter.view = viewController
         return viewController

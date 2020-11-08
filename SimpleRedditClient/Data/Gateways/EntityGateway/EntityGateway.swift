@@ -41,18 +41,27 @@ class EntityGateway {
     }
 
     private func perform<T>(_ request: URLRequest, completion: @escaping ResponseCompletion<T>) {
-        return restClient.perform(request) { [weak self] data, error in
+        return restClient.perform(request) { [weak self] result in
             guard let self = self else { return }
-            do {
-                try self.handle(error)
-                let aData = try self.check(data)
-                let response: T = try self.map(aData)
-                DispatchQueue.main.async {
-                    completion(.success(response))
+            switch result {
+            case .success(let data):
+                do {
+                    let aData = try self.check(data)
+                    let response: T = try self.map(aData)
+                    self.dispatch(completion: completion, with: .success(response))
+                } catch {
+                    self.dispatch(completion: completion, with: .failure(error))
                 }
-            } catch {
-                completion(.failure(error))
+            case .failure(let error):
+                self.dispatch(completion: completion, with: .failure(error))
             }
+        }
+    }
+
+    private func dispatch<T: Decodable>(completion: @escaping ResponseCompletion<T>,
+                                        with result: Result<T, Error>) {
+        DispatchQueue.main.async {
+            completion(result)
         }
     }
 

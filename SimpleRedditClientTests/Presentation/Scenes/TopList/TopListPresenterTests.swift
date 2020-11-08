@@ -94,8 +94,9 @@ final class TopListPresenterTests: TestCase {
 private extension TopListPresenterTests {
 
     func makeInstance(gateway: TopEntryGateway = TopEntryGatewayDummy(),
+                      imageRepository: ImageRepository = ImageRepositoryDummy(),
                       view: TopEntryListView = TopEntryListViewDummy()) -> TopEntryListPresenterImpl {
-        let presenter = TopEntryListPresenterImpl(gateway)
+        let presenter = TopEntryListPresenterImpl(gateway, imageRepository)
         presenter.view = view
         return presenter
     }

@@ -9,9 +9,11 @@ import Foundation
 
 protocol RestClient {
 
-    typealias Completion = (_ data: Data?, _ error: RestClientError?) -> Void
+    typealias RequestCompletion = (_ result: Result<Data?, RestClientError>) -> Void
+    typealias DownloadRequestCompletion = (_ result: Result<URL, RestClientError>) -> Void
 
-    func perform(_ request: URLRequest, _ completion: @escaping Completion)
+    func perform(_ request: URLRequest, _ completion: @escaping RequestCompletion)
+    func downloadData(at url: URL, completion: @escaping DownloadRequestCompletion) -> CancellationToken
 
 }
 
@@ -22,37 +24,49 @@ class RestClientImpl: RestClient {
         return URLSession(configuration: configuration)
     }()
 
-    func perform(_ request: URLRequest, _ completion: @escaping Completion) {
+    func perform(_ request: URLRequest, _ completion: @escaping RequestCompletion) {
         let task = session.dataTask(with: request) { (data, response, error) in
-            if let error = error {
-                self.handleNetworkError(error, completion)
-            } else if let httpResponse = response as? HTTPURLResponse {
-                self.handle(httpResponse: httpResponse, data: data, completion: completion)
-            } else {
-                completion(data, nil)
+            do {
+                try self.handleNetworkError(error)
+                try self.handle(response: response, data: data)
+                completion(.success(data))
+            } catch {
+                completion(.failure(error as! RestClientError))
             }
         }
         task.resume()
     }
 
-    private func handleNetworkError(_ error: Error, _ completion: Completion) {
+    func downloadData(at url: URL, completion: @escaping DownloadRequestCompletion) -> CancellationToken {
+        let task = session.downloadTask(with: url) { (url, response, error) in
+            do {
+                try self.handleNetworkError(error)
+                try self.handle(response: response, data: nil)
+                completion(.success(url!))
+            } catch {
+                completion(.failure(error as! RestClientError))
+            }
+        }
+        task.resume()
+        return task
+    }
+
+    private func handleNetworkError(_ error: Error?) throws {
+        guard let error = error else { return }
         let restClientError: RestClientError
         switch (error as NSError).code {
             case NSURLErrorNotConnectedToInternet: restClientError = .notConnectedToInternet
             case NSURLErrorCancelled: restClientError = .cancelled
             default: restClientError = .networkError(error)
         }
-        completion(nil, restClientError)
+        throw restClientError
     }
 
-    private func handle(httpResponse: HTTPURLResponse,
-                        data: Data?,
-                        completion: @escaping Completion) {
-        if Constant.httpStatusCodeErrorRange ~= httpResponse.statusCode {
-            let restClientError: RestClientError = .httpError(data: data, statusCode: httpResponse.statusCode)
-            completion(data, restClientError)
-        } else {
-            completion(data, nil)
+    private func handle(response: URLResponse?,
+                        data: Data?) throws {
+        if let httpResponse = response as? HTTPURLResponse,
+           Constant.httpStatusCodeErrorRange ~= httpResponse.statusCode {
+            throw RestClientError.httpError(data: data, statusCode: httpResponse.statusCode)
         }
     }
 
@@ -65,6 +79,8 @@ extension RestClientImpl {
     }
 
 }
+
+extension URLSessionTask: CancellationToken { }
 
 enum RestClientError: Error {
 

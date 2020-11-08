@@ -10,6 +10,7 @@
 final class TopEntryListViewDummy: TopEntryListView {
 
     func show(items: [TopEntryViewModel]) { }
+    func replace(oldItem: TopEntryViewModel, with newItem: TopEntryViewModel) { }
     func showAlertWith(message: String) { }
 
 }

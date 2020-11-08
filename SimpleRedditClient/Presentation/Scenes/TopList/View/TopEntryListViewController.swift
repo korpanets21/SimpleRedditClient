@@ -72,6 +72,15 @@ extension TopEntryListViewController: TopEntryListView {
         dataSource?.apply(snapshot)
     }
 
+    func replace(oldItem: TopEntryViewModel, with newItem: TopEntryViewModel) {
+        if var snapshot = dataSource?.snapshot() {
+            snapshot.reloadItems([oldItem])
+            snapshot.insertItems([newItem], beforeItem: oldItem)
+            snapshot.deleteItems([oldItem])
+            dataSource?.apply(snapshot)
+        }
+    }
+
     func showAlertWith(message: String) {
         let alert = UIAlertController(title: nil, message: message, preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: "Ok", style: .default, handler: nil))
@@ -81,12 +90,14 @@ extension TopEntryListViewController: TopEntryListView {
 }
 
 extension TopEntryListViewController: UITableViewDelegate {
+
     func tableView(_ tableView: UITableView,
                    willDisplay cell: UITableViewCell,
                    forRowAt indexPath: IndexPath) {
         guard let viewModel = dataSource?.itemIdentifier(for: indexPath) else { return }
         presenter?.willDisplayItem(viewModel)
     }
+
 }
 
 extension TopEntryListViewController {
