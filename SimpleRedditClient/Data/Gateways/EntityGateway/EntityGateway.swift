@@ -29,18 +29,18 @@ class EntityGateway {
         self.configuration = configuration
     }
 
-    func perform<T>(_ builderClosure: BuilderClosure, completion: @escaping ResponseCompletion<T>) {
+    func perform<T>(_ builderClosure: BuilderClosure, completion: @escaping ResponseCompletion<T>) -> CancellationToken? {
         let url = URL(string: configuration.baseURL)!
         let builder = URLRequestBuilder(baseURL: url)
         builderClosure(builder)
         guard let urlRequest = builder.urlRequest else {
             completion(.failure(EntityGatewayError.failedToBuildURLRequest))
-            return
+            return nil
         }
-        perform(urlRequest, completion: completion)
+        return perform(urlRequest, completion: completion)
     }
 
-    private func perform<T>(_ request: URLRequest, completion: @escaping ResponseCompletion<T>) {
+    private func perform<T>(_ request: URLRequest, completion: @escaping ResponseCompletion<T>) -> CancellationToken? {
         return restClient.perform(request) { [weak self] result in
             guard let self = self else { return }
             switch result {

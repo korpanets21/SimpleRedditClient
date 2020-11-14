@@ -12,11 +12,13 @@ class TopEntryGatewayMock: TopEntryGateway {
     
     private var log: [Action] = []
 
-    func fetch(completion: @escaping TopEntryGatewayFetchCompletion) {
+    func fetch(completion: @escaping TopEntryGatewayFetchCompletion) -> CancellationToken? {
         log.append(.fetch)
+        return nil
     }
-    func fetchMore(completion: @escaping TopEntryGatewayFetchCompletion) {
+    func fetchMore(completion: @escaping TopEntryGatewayFetchCompletion) -> CancellationToken? {
         log.append(.fetchMore)
+        return nil
     }
 
     func verifyCalled(_ action: Action) {

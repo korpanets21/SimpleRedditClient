@@ -51,13 +51,13 @@ final class TopEntryListPresenterImpl: TopEntryListPresenter {
     }
 
     func viewLoaded() {
-        gateway.fetch(completion: { [weak self] result in
+        _ = gateway.fetch(completion: { [weak self] result in
             self?.handle(result)
         })
     }
 
     func refresh(completion: @escaping RefreshCompletion) {
-        gateway.fetch { [weak self] result in
+        _ = gateway.fetch { [weak self] result in
             self?.topEntries = []
             self?.handle(result)
             completion()
@@ -66,7 +66,7 @@ final class TopEntryListPresenterImpl: TopEntryListPresenter {
 
     func willDisplayItem(_ viewModel: TopEntryViewModel) {
         guard viewModel.id == topEntries[topEntries.count - 3].id else { return }
-        gateway.fetchMore { [weak self] result in
+        _ = gateway.fetchMore { [weak self] result in
             self?.handle(result)
         }
     }

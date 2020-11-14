@@ -12,7 +12,7 @@ protocol RestClient {
     typealias RequestCompletion = (_ result: Result<Data?, RestClientError>) -> Void
     typealias DownloadRequestCompletion = (_ result: Result<URL, RestClientError>) -> Void
 
-    func perform(_ request: URLRequest, _ completion: @escaping RequestCompletion)
+    func perform(_ request: URLRequest, _ completion: @escaping RequestCompletion) -> CancellationToken
     func downloadData(at url: URL, completion: @escaping DownloadRequestCompletion) -> CancellationToken
 
 }
@@ -24,7 +24,7 @@ class RestClientImpl: RestClient {
         return URLSession(configuration: configuration)
     }()
 
-    func perform(_ request: URLRequest, _ completion: @escaping RequestCompletion) {
+    func perform(_ request: URLRequest, _ completion: @escaping RequestCompletion) -> CancellationToken {
         let task = session.dataTask(with: request) { (data, response, error) in
             do {
                 try self.handleNetworkError(error)
@@ -35,6 +35,7 @@ class RestClientImpl: RestClient {
             }
         }
         task.resume()
+        return task
     }
 
     func downloadData(at url: URL, completion: @escaping DownloadRequestCompletion) -> CancellationToken {

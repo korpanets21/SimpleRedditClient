@@ -11,8 +11,9 @@ final class TopEntryGatewayFetchFailingStub: TopEntryGatewayDummy {
 
     let error = TestError.default
 
-    override func fetch(completion: @escaping TopEntryGatewayFetchCompletion) {
+    override func fetch(completion: @escaping TopEntryGatewayFetchCompletion) -> CancellationToken? {
         completion(.failure(error))
+        return super.fetch(completion: completion)
     }
 
 }

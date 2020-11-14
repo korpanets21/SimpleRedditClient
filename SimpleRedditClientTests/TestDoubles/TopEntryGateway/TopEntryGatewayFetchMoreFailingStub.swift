@@ -16,12 +16,14 @@ final class TopEntryGatewayFetchMoreFailingStub: TopEntryGateway {
         self.firstPageItems = firstPageItems
     }
 
-    func fetch(completion: @escaping TopEntryGatewayFetchCompletion) {
+    func fetch(completion: @escaping TopEntryGatewayFetchCompletion) -> CancellationToken? {
         completion(.success(firstPageItems))
+        return nil
     }
 
-    func fetchMore(completion: @escaping TopEntryGatewayFetchCompletion) {
+    func fetchMore(completion: @escaping TopEntryGatewayFetchCompletion) -> CancellationToken? {
         completion(.failure(error))
+        return nil
     }
 
 }

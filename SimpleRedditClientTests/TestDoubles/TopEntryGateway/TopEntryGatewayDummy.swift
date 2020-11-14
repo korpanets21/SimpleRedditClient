@@ -9,7 +9,11 @@
 
 class TopEntryGatewayDummy: TopEntryGateway {
 
-    func fetch(completion: @escaping TopEntryGatewayFetchCompletion) { }
-    func fetchMore(completion: (Result<[TopEntry], Error>) -> Void) { }
+    func fetch(completion: @escaping TopEntryGatewayFetchCompletion) -> CancellationToken? {
+        return nil
+    }
+    func fetchMore(completion: (Result<[TopEntry], Error>) -> Void) -> CancellationToken? {
+        return nil
+    }
 
 }
