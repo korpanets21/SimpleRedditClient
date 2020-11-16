@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct TopEntry: Decodable {
+struct TopEntry: Decodable, Equatable {
 
     let id: String
     let title: String

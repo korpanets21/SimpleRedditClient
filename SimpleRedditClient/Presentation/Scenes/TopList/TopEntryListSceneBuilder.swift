@@ -15,7 +15,9 @@ final class TopEntryListSceneBuilder {
         let gateway = TopEntryGatewayImpl(restClient)
         let imageGateway = ImageGatewayImpl(restClient)
         let imageRepository = ImageRepositoryImpl(imageGateway)
-        let presenter = TopEntryListPresenterImpl(gateway, imageRepository)
+        let interactor = FetchTopEntriesInteractor(gateway)
+        let presenter = TopEntryListPresenterImpl(interactor, imageRepository)
+        interactor.output = presenter
         viewController.presenter = presenter
         presenter.view = viewController
         return viewController

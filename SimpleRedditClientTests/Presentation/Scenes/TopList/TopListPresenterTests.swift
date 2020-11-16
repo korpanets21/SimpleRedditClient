@@ -10,104 +10,175 @@ import XCTest
 
 final class TopListPresenterTests: TestCase {
 
+    private let topEntries: [TopEntry] = [.stub0, .stub1, .stub2, .stub3]
+    private let error = TestError.default
+
     func testWhenViewLoadedThenShouldFetchTopEntities() {
-        let gatewayMock = TopEntryGatewayMock()
-        let presenter = makeInstance(gateway: gatewayMock)
+        let (presenter, interactorMock) = makeInstanceWithInteractorMock()
         presenter.viewLoaded()
-        gatewayMock.verifyCalled(.fetch)
+        interactorMock.verifyCalled(.fetch)
     }
 
     func testWhenFetchedTopEntitiesThenShouldCallShowOnView() {
-        let viewMock = TopEntryListViewMock()
-        let gatewayStub = TopEntryGatewayFetchSuccessfullyStub()
-        let presenter = makeInstance(gateway: gatewayStub, view: viewMock)
-        presenter.viewLoaded()
+        let (presenter, viewMock) = makeInstanceWithViewMock()
+        moveToInitiallyLoadedState(presenter, with: topEntries)
         viewMock.verifyCalled(.showItems)
     }
 
     func testViewModelsContentFormatting() {
-        let viewMock = TopEntryListViewMock()
-        let gatewayStub = TopEntryGatewayFetchSuccessfullyStub()
-        let presenter = makeInstance(gateway: gatewayStub, view: viewMock)
-        presenter.viewLoaded()
-        let expectedViewModels = gatewayStub.items.map({ makeViewModel(for: $0) })
+        let (presenter, viewMock) = makeInstanceWithViewMock()
+        moveToInitiallyLoadedState(presenter, with: topEntries)
+        let expectedViewModels = topEntries.map({ makeViewModel(for: $0) })
         viewMock.verifyContains(expectedViewModels)
     }
 
     func testWhenFailedToFetchTopEntriesThenShouldShowErrorMessage() {
-        let viewMock = TopEntryListViewMock()
-        let gatewayStub = TopEntryGatewayFetchFailingStub()
-        let presenter = makeInstance(gateway: gatewayStub, view: viewMock)
+        let (presenter, viewMock) = makeInstanceWithViewMock()
         presenter.viewLoaded()
+        presenter.failedToFetchTopEntries(with: error)
         viewMock.verifyCalled(.showAlertWithMessage)
     }
 
     func testErrorFormatting() {
-        let viewMock = TopEntryListViewMock()
-        let gatewayStub = TopEntryGatewayFetchFailingStub()
-        let presenter = makeInstance(gateway: gatewayStub, view: viewMock)
+        let (presenter, viewMock) = makeInstanceWithViewMock()
         presenter.viewLoaded()
-        viewMock.verifyMessageFormat(gatewayStub.error.localizedDescription)
+        presenter.failedToFetchTopEntries(with: error)
+        viewMock.verifyMessageFormat(error.localizedDescription)
     }
 
     func testWhenIsDisplayingAntepenultimateItemThenFetchMore() {
-        let entries: [TopEntry] = [.stub0, .stub1, .stub2, .stub3]
-        let (presenter, gatewayStub) = makeInstanceWithGatewayStub(entries: entries)
-        gatewayStub.clear()
+        let (presenter, interactorMock) = makeInstanceWithInteractorMock()
+        moveToInitiallyLoadedState(presenter, with: topEntries)
+        interactorMock.clear()
         presenter.willDisplayItem(makeViewModel(for: .stub1))
-        gatewayStub.verifyCalled(.fetchMore)
+        interactorMock.verifyCalled(.fetchMore)
     }
 
     func testWhenIsDisplayingNotAnAntepenultimateItemThenDoNotFetchMore() {
-        let entries: [TopEntry] = [.stub0, .stub1, .stub2, .stub3]
-        let (presenter, gatewayStub) = makeInstanceWithGatewayStub(entries: entries)
-        gatewayStub.clear()
+        let (presenter, interactorMock) = makeInstanceWithInteractorMock()
+        moveToInitiallyLoadedState(presenter, with: topEntries)
+        interactorMock.clear()
         presenter.willDisplayItem(makeViewModel(for: .stub0))
         presenter.willDisplayItem(makeViewModel(for: .stub2))
         presenter.willDisplayItem(makeViewModel(for: .stub3))
-        gatewayStub.verifyWasNotCalled()
+        interactorMock.verifyWasNotCalled()
     }
 
     func testWhenFetchedMoreThenShouldCallShowOnView() {
-        let viewMock = TopEntryListViewMock()
-        let (presenter, gatewayStub) = makeInstanceWithGatewayStub(view: viewMock, entries: [.stub1, .stub2, .stub3])
+        let (presenter, viewMock) = makeInstanceWithViewMock()
+        moveToInitiallyLoadedState(presenter, with: topEntries)
         viewMock.clear()
-        presenter.willDisplayItem(makeViewModel(for: .stub1))
+        moveToSuccessfullyFetchedMoreState(presenter, antepenultimateItem: .stub1, with: topEntries)
         viewMock.verifyCalled(.showItems)
-        let totalList = gatewayStub.items + gatewayStub.items
+        let totalList = topEntries + topEntries
         viewMock.verifyContains(totalList.map({ makeViewModel(for: $0) }))
     }
 
     func testWhenFailedToFetchMoreThenShouldCallShowErrorMessage() {
-        let viewMock = TopEntryListViewMock()
-        let gatewayStub = TopEntryGatewayFetchMoreFailingStub([.stub1, .stub2, .stub3])
-        let presenter = makeInstance(gateway: gatewayStub, view: viewMock)
-        presenter.viewLoaded()
+        let (presenter, viewMock) = makeInstanceWithViewMock()
+        moveToInitiallyLoadedState(presenter, with: topEntries)
         viewMock.clear()
         presenter.willDisplayItem(makeViewModel(for: .stub1))
+        presenter.failedToFetchTopEntries(with: error)
         viewMock.verifyCalled(.showAlertWithMessage)
-        viewMock.verifyMessageFormat(gatewayStub.error.localizedDescription)
+        viewMock.verifyMessageFormat(error.localizedDescription)
+    }
+
+    func testRefreshShouldCallFetchOnInteractor() {
+        let (presenter, interactorMock) = makeInstanceWithInteractorMock()
+        moveToInitiallyLoadedState(presenter, with: topEntries)
+        interactorMock.clear()
+        presenter.refresh()
+        interactorMock.verifyCalled(.fetch)
+    }
+
+    func testWhenRefreshedThenShouldCallShowOnViewWithOnlyNewEntries() {
+        let (presenter, viewMock) = makeInstanceWithViewMock()
+        moveToInitiallyLoadedState(presenter, with: topEntries)
+        viewMock.clear()
+        moveToSuccessfullyRefreshedState(presenter, with: [.stub0])
+        viewMock.verifyContains([makeViewModel(for: .stub0)])
+    }
+
+    func testGivenFinishedRefreshWhenCalledFetchMoreThenShouldCallFetchMoreOnInteractor() {
+        let (presenter, interactorMock) = makeInstanceWithInteractorMock()
+        moveToInitiallyLoadedState(presenter, with: topEntries)
+        moveToSuccessfullyRefreshedState(presenter, with: topEntries)
+        interactorMock.clear()
+        presenter.willDisplayItem(makeViewModel(for: .stub1))
+        interactorMock.verifyCalled(.fetchMore)
+    }
+
+    func testWhenFetchedMoreAfterRefreshThenShouldCallShowOnViewWithConcatenatedItems() {
+        let (presenter, viewMock) = makeInstanceWithViewMock()
+        moveToInitiallyLoadedState(presenter, with: topEntries)
+        moveToSuccessfullyRefreshedState(presenter, with: topEntries)
+        viewMock.clear()
+        moveToSuccessfullyFetchedMoreState(presenter, antepenultimateItem: .stub1, with: topEntries)
+        let allEntries = topEntries + topEntries
+        viewMock.verifyContains(allEntries.map({ makeViewModel(for: $0) }))
+    }
+
+    func testGivenFailedRefreshWhenFetchedMoreThenShouldCallShowOnViewWithConcatenatedItems() {
+        let (presenter, viewMock) = makeInstanceWithViewMock()
+        moveToInitiallyLoadedState(presenter, with: topEntries)
+        moveToFailedRefreshedState(presenter, with: error)
+        viewMock.clear()
+        moveToSuccessfullyFetchedMoreState(presenter, antepenultimateItem: .stub1, with: topEntries)
+        let allEntries = topEntries + topEntries
+        viewMock.verifyContains(allEntries.map({ makeViewModel(for: $0) }))
     }
 
 }
 
 private extension TopListPresenterTests {
 
-    func makeInstance(gateway: TopEntryGateway = TopEntryGatewayDummy(),
+    func makeInstance(interactor: FetchTopEntriesInteractorInput = FetchTopEntriesInteractorDummy(),
                       imageRepository: ImageRepository = ImageRepositoryDummy(),
                       view: TopEntryListView = TopEntryListViewDummy()) -> TopEntryListPresenterImpl {
-        let presenter = TopEntryListPresenterImpl(gateway, imageRepository)
+        let presenter = TopEntryListPresenterImpl(interactor, imageRepository)
         presenter.view = view
         return presenter
     }
 
-    func makeInstanceWithGatewayStub(view: TopEntryListView = TopEntryListViewDummy(),
-                                     entries: [TopEntry] = [.stub0]) -> (TopEntryListPresenterImpl, TopEntryGatewayFetchSuccessfullyStub) {
-        let gatewayStub = TopEntryGatewayFetchSuccessfullyStub(entries)
-        let presenter = makeInstance(gateway: gatewayStub, view: view)
-        presenter.viewLoaded()
-        return (presenter, gatewayStub)
+    func makeInstanceWithViewMock() -> (TopEntryListPresenterImpl, TopEntryListViewMock) {
+        let viewMock = TopEntryListViewMock()
+        return (makeInstance(view: viewMock), viewMock)
     }
+
+    func makeInstanceWithInteractorMock() -> (TopEntryListPresenterImpl, FetchTopEntriesInteractorMock) {
+        let interactorMock = FetchTopEntriesInteractorMock()
+        return (makeInstance(interactor: interactorMock), interactorMock)
+    }
+
+}
+
+private extension TopListPresenterTests {
+
+    func moveToInitiallyLoadedState(_ presenter: TopEntryListPresenterImpl, with entries: [TopEntry]) {
+        presenter.viewLoaded()
+        presenter.didFetchTopEntries(entries)
+    }
+
+    func moveToSuccessfullyRefreshedState(_ presenter: TopEntryListPresenterImpl,
+                                          with newEntries: [TopEntry]) {
+        presenter.refresh()
+        presenter.didFetchTopEntries(newEntries)
+    }
+
+    func moveToFailedRefreshedState(_ presenter: TopEntryListPresenterImpl,
+                                    with error: Error) {
+        presenter.refresh()
+        presenter.failedToFetchTopEntries(with: error)
+    }
+
+    func moveToSuccessfullyFetchedMoreState(_ presenter: TopEntryListPresenterImpl,
+                                            antepenultimateItem: TopEntry,
+                                            with newEntries: [TopEntry]) {
+        presenter.willDisplayItem(makeViewModel(for: antepenultimateItem))
+        presenter.didFetchTopEntries(newEntries)
+    }
+
 }
 
 private extension TopListPresenterTests {

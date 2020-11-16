@@ -7,7 +7,7 @@
 
 @testable import SimpleRedditClient
 
-final class TopEntryGatewayFetchSuccessfullyStub: TopEntryGatewayMock {
+final class TopEntryGatewayFetchSuccessfullyStub: TopEntryGatewayDummy {
 
     let items: [TopEntry]
 
@@ -16,13 +16,6 @@ final class TopEntryGatewayFetchSuccessfullyStub: TopEntryGatewayMock {
     }
 
     override func fetch(completion: @escaping TopEntryGatewayFetchCompletion) -> CancellationToken? {
-        _ = super.fetch(completion: completion)
-        completion(.success(items))
-        return nil
-    }
-
-    override func fetchMore(completion: @escaping TopEntryGatewayFetchCompletion) -> CancellationToken? {
-        _ = super.fetchMore(completion: completion)
         completion(.success(items))
         return nil
     }

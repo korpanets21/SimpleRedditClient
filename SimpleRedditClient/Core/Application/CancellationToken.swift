@@ -7,7 +7,7 @@
 
 import Foundation
 
-protocol CancellationToken {
+protocol CancellationToken: AnyObject {
 
     func cancel()
 

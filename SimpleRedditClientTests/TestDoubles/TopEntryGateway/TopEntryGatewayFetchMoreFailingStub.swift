@@ -7,22 +7,12 @@
 
 @testable import SimpleRedditClient
 
-final class TopEntryGatewayFetchMoreFailingStub: TopEntryGateway {
+final class TopEntryGatewayFetchMoreFailingStub: TopEntryGatewayDummy {
 
-    let firstPageItems: [TopEntry]
     let error = TestError.default
 
-    init(_ firstPageItems: [TopEntry] = [.stub0]) {
-        self.firstPageItems = firstPageItems
-    }
-
-    func fetch(completion: @escaping TopEntryGatewayFetchCompletion) -> CancellationToken? {
-        completion(.success(firstPageItems))
-        return nil
-    }
-
-    func fetchMore(completion: @escaping TopEntryGatewayFetchCompletion) -> CancellationToken? {
-        completion(.failure(error))
+    override func fetchMore(completion: @escaping TopEntryGatewayFetchCompletion) -> CancellationToken? {
+        completion(.failure(self.error))
         return nil
     }
 

@@ -40,45 +40,31 @@ final class TopEntryListPresenterImpl: TopEntryListPresenter {
 
     weak var view: TopEntryListView?
 
-    private let gateway: TopEntryGateway
+    private let interactor: FetchTopEntriesInteractorInput
     private let imageRepository: ImageRepository
     private lazy var authorInfoFormatter = TopEntryAuthorInfoFormatter()
     private var topEntries: [TopEntry] = []
+    private var isRefreshing = false
 
-    init(_ gateway: TopEntryGateway, _ imageRepository: ImageRepository) {
-        self.gateway = gateway
+    init(_ interactor: FetchTopEntriesInteractorInput, _ imageRepository: ImageRepository) {
         self.imageRepository = imageRepository
+        self.interactor = interactor
     }
 
     func viewLoaded() {
-        _ = gateway.fetch(completion: { [weak self] result in
-            self?.handle(result)
-        })
+        interactor.fetch()
     }
 
-    func refresh(completion: @escaping RefreshCompletion) {
-        _ = gateway.fetch { [weak self] result in
-            self?.topEntries = []
-            self?.handle(result)
-            completion()
-        }
+    func refresh() {
+        isRefreshing = true
+        interactor.fetch()
     }
 
     func willDisplayItem(_ viewModel: TopEntryViewModel) {
-        guard viewModel.id == topEntries[topEntries.count - 3].id else { return }
-        _ = gateway.fetchMore { [weak self] result in
-            self?.handle(result)
+        guard viewModel.id == topEntries[topEntries.count - 3].id else {
+            return
         }
-    }
-
-    private func handle(_ result: Result<[TopEntry], Error>) {
-        switch result {
-        case .success(let topEntries):
-            self.topEntries += topEntries
-            show(items: self.topEntries)
-        case .failure(let error):
-            show(error: error)
-        }
+        interactor.fetchMore()
     }
 
     private func show(error: Error) {
@@ -97,6 +83,29 @@ final class TopEntryListPresenterImpl: TopEntryListPresenter {
                                  info: authorInfoFormatter.infoString(for: entry),
                                  thumbnail: imageData,
                                  commentsCount: String(entry.commentsCount))
+    }
+
+    private func resetIsRefreshing() {
+        isRefreshing = false
+    }
+
+}
+
+extension TopEntryListPresenterImpl: FetchTopEntriesInteractorOutput {
+
+    func didFetchTopEntries(_ topEntries: [TopEntry]) {
+        if isRefreshing {
+            self.topEntries = topEntries
+            resetIsRefreshing()
+        } else {
+            self.topEntries += topEntries
+        }
+        show(items: self.topEntries)
+    }
+
+    func failedToFetchTopEntries(with error: Error) {
+        show(error: error)
+        resetIsRefreshing()
     }
 
 }

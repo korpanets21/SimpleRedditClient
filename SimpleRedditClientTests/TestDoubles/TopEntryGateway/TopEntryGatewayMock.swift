@@ -8,21 +8,21 @@
 import XCTest
 @testable import SimpleRedditClient
 
-class TopEntryGatewayMock: TopEntryGateway {
+final class TopEntryGatewayMock: TopEntryGateway, CancellationToken {
     
     private var log: [Action] = []
 
     func fetch(completion: @escaping TopEntryGatewayFetchCompletion) -> CancellationToken? {
         log.append(.fetch)
-        return nil
+        return self
     }
     func fetchMore(completion: @escaping TopEntryGatewayFetchCompletion) -> CancellationToken? {
         log.append(.fetchMore)
-        return nil
+        return self
     }
 
     func verifyCalled(_ action: Action) {
-        XCTAssertEqual([action], log)
+        XCTAssertTrue(log.contains(action))
     }
 
     func verifyWasNotCalled() {
@@ -32,6 +32,10 @@ class TopEntryGatewayMock: TopEntryGateway {
     func clear() {
         log = []
     }
+
+    func cancel() {
+        log.append(.cancel)
+    }
 }
 
 extension TopEntryGatewayMock {
@@ -39,6 +43,7 @@ extension TopEntryGatewayMock {
     enum Action {
         case fetch
         case fetchMore
+        case cancel
     }
 
 }

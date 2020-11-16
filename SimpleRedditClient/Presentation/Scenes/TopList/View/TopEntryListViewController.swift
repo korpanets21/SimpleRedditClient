@@ -12,7 +12,7 @@ protocol TopEntryListPresenter {
     typealias RefreshCompletion = () -> Void
 
     func viewLoaded()
-    func refresh(completion: @escaping RefreshCompletion)
+    func refresh()
     func willDisplayItem(_ viewModel: TopEntryViewModel)
 
 }
@@ -54,11 +54,7 @@ class TopEntryListViewController: UIViewController {
     }
 
     @objc private func refreshAction() {
-        presenter?.refresh { [weak self] in
-            if self?.refreshControl.isRefreshing == true {
-                self?.refreshControl.endRefreshing()
-            }
-        }
+        presenter?.refresh()
     }
 
 }
@@ -70,11 +66,15 @@ extension TopEntryListViewController: TopEntryListView {
         snapshot.appendSections([.topEntries])
         snapshot.appendItems(items, toSection: .topEntries)
         dataSource?.apply(snapshot)
+
+        //TODO: Move to separate method that will be called by presenter. Add tests
+        if refreshControl.isRefreshing {
+            refreshControl.endRefreshing()
+        }
     }
 
     func replace(oldItem: TopEntryViewModel, with newItem: TopEntryViewModel) {
         if var snapshot = dataSource?.snapshot() {
-            snapshot.reloadItems([oldItem])
             snapshot.insertItems([newItem], beforeItem: oldItem)
             snapshot.deleteItems([oldItem])
             dataSource?.apply(snapshot)

@@ -18,6 +18,11 @@
 		4505B1C425581C3600E23F3E /* ImageGateway.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4505B1C325581C3600E23F3E /* ImageGateway.swift */; };
 		4505B1CB2558381700E23F3E /* ImageRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4505B1CA2558381700E23F3E /* ImageRepository.swift */; };
 		4505B1D12558417500E23F3E /* ImageRepositoryDummy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4505B1D02558417500E23F3E /* ImageRepositoryDummy.swift */; };
+		4527CE5A255FE73000264571 /* TopEntryGatewayFetchMoreSuccessfullyStub.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4527CE59255FE73000264571 /* TopEntryGatewayFetchMoreSuccessfullyStub.swift */; };
+		45643BE025615A180068898B /* FetchTopEntriesInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45643BDF25615A180068898B /* FetchTopEntriesInteractor.swift */; };
+		45643BE625615AAF0068898B /* FetchTopEntriesInteractorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45643BE525615AAF0068898B /* FetchTopEntriesInteractorTests.swift */; };
+		45643BF2256175B90068898B /* FetchTopEntriesInteractorMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45643BF1256175B90068898B /* FetchTopEntriesInteractorMock.swift */; };
+		45643BFA256176880068898B /* FetchTopEntriesInteractorDummy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45643BF9256176880068898B /* FetchTopEntriesInteractorDummy.swift */; };
 		4580EBC52556CBCE009F443E /* TopEntryGatewayFetchFailingStub.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4580EBC42556CBCE009F443E /* TopEntryGatewayFetchFailingStub.swift */; };
 		4580EBCA2556CC09009F443E /* TestError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4580EBC92556CC09009F443E /* TestError.swift */; };
 		4580EBD02556D252009F443E /* ErrorFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4580EBCF2556D252009F443E /* ErrorFormatter.swift */; };
@@ -75,6 +80,11 @@
 		4505B1C325581C3600E23F3E /* ImageGateway.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageGateway.swift; sourceTree = "<group>"; };
 		4505B1CA2558381700E23F3E /* ImageRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageRepository.swift; sourceTree = "<group>"; };
 		4505B1D02558417500E23F3E /* ImageRepositoryDummy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageRepositoryDummy.swift; sourceTree = "<group>"; };
+		4527CE59255FE73000264571 /* TopEntryGatewayFetchMoreSuccessfullyStub.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopEntryGatewayFetchMoreSuccessfullyStub.swift; sourceTree = "<group>"; };
+		45643BDF25615A180068898B /* FetchTopEntriesInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FetchTopEntriesInteractor.swift; sourceTree = "<group>"; };
+		45643BE525615AAF0068898B /* FetchTopEntriesInteractorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FetchTopEntriesInteractorTests.swift; sourceTree = "<group>"; };
+		45643BF1256175B90068898B /* FetchTopEntriesInteractorMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FetchTopEntriesInteractorMock.swift; sourceTree = "<group>"; };
+		45643BF9256176880068898B /* FetchTopEntriesInteractorDummy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FetchTopEntriesInteractorDummy.swift; sourceTree = "<group>"; };
 		4580EBC42556CBCE009F443E /* TopEntryGatewayFetchFailingStub.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopEntryGatewayFetchFailingStub.swift; sourceTree = "<group>"; };
 		4580EBC92556CC09009F443E /* TestError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestError.swift; sourceTree = "<group>"; };
 		4580EBCF2556D252009F443E /* ErrorFormatter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorFormatter.swift; sourceTree = "<group>"; };
@@ -174,6 +184,7 @@
 			isa = PBXGroup;
 			children = (
 				4505B1B625581BBF00E23F3E /* CancellationToken.swift */,
+				45643BDF25615A180068898B /* FetchTopEntriesInteractor.swift */,
 			);
 			path = Application;
 			sourceTree = "<group>";
@@ -201,6 +212,23 @@
 				4505B1D02558417500E23F3E /* ImageRepositoryDummy.swift */,
 			);
 			path = ImageRepository;
+			sourceTree = "<group>";
+		};
+		45643BE425615A990068898B /* Core */ = {
+			isa = PBXGroup;
+			children = (
+				45643BE525615AAF0068898B /* FetchTopEntriesInteractorTests.swift */,
+			);
+			path = Core;
+			sourceTree = "<group>";
+		};
+		45643BF0256175AD0068898B /* FetchTopEntriesInteractor */ = {
+			isa = PBXGroup;
+			children = (
+				45643BF1256175B90068898B /* FetchTopEntriesInteractorMock.swift */,
+				45643BF9256176880068898B /* FetchTopEntriesInteractorDummy.swift */,
+			);
+			path = FetchTopEntriesInteractor;
 			sourceTree = "<group>";
 		};
 		4580EBCE2556D23E009F443E /* Formatters */ = {
@@ -280,6 +308,7 @@
 				45F003B22553EC93009733D0 /* TopEntryGatewayFetchSuccessfullyStub.swift */,
 				4580EBC42556CBCE009F443E /* TopEntryGatewayFetchFailingStub.swift */,
 				4505B1A9255805DE00E23F3E /* TopEntryGatewayFetchMoreFailingStub.swift */,
+				4527CE59255FE73000264571 /* TopEntryGatewayFetchMoreSuccessfullyStub.swift */,
 			);
 			path = TopEntryGateway;
 			sourceTree = "<group>";
@@ -287,6 +316,7 @@
 		45B4F7CF2553EF7800EC6710 /* TestDoubles */ = {
 			isa = PBXGroup;
 			children = (
+				45643BF0256175AD0068898B /* FetchTopEntriesInteractor */,
 				4505B1CF2558416B00E23F3E /* ImageRepository */,
 				458E7EC92556C7E700F99A2C /* TopEntryGateway */,
 				45B4F7D02553EF9B00EC6710 /* Top+Stubs.swift */,
@@ -330,9 +360,10 @@
 		45F0035D2553E076009733D0 /* SimpleRedditClientTests */ = {
 			isa = PBXGroup;
 			children = (
-				45B4F7CF2553EF7800EC6710 /* TestDoubles */,
-				45F0038B2553E623009733D0 /* TestCase.swift */,
 				45F003602553E076009733D0 /* Info.plist */,
+				45F0038B2553E623009733D0 /* TestCase.swift */,
+				45643BE425615A990068898B /* Core */,
+				45B4F7CF2553EF7800EC6710 /* TestDoubles */,
 				45F0039D2553E81E009733D0 /* Presentation */,
 			);
 			path = SimpleRedditClientTests;
@@ -570,6 +601,7 @@
 				4505B1882557B66900E23F3E /* TopEntryListSceneBuilder.swift in Sources */,
 				4580EC0D2556EC99009F443E /* RestClient.swift in Sources */,
 				45F0034A2553E073009733D0 /* SceneDelegate.swift in Sources */,
+				45643BE025615A180068898B /* FetchTopEntriesInteractor.swift in Sources */,
 				4505B19B2557BA7800E23F3E /* TopEntryTableViewCell.swift in Sources */,
 				4505B1CB2558381700E23F3E /* ImageRepository.swift in Sources */,
 				4580EC1E2556F09E009F443E /* EntityGateway.swift in Sources */,
@@ -580,19 +612,23 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4527CE5A255FE73000264571 /* TopEntryGatewayFetchMoreSuccessfullyStub.swift in Sources */,
 				45F003B32553EC93009733D0 /* TopEntryGatewayFetchSuccessfullyStub.swift in Sources */,
 				45F003872553E611009733D0 /* TopListPresenterTests.swift in Sources */,
+				45643BE625615AAF0068898B /* FetchTopEntriesInteractorTests.swift in Sources */,
 				45F003A62553E83C009733D0 /* TopEntryGatewayDummy.swift in Sources */,
 				4580EBC52556CBCE009F443E /* TopEntryGatewayFetchFailingStub.swift in Sources */,
 				458E7EBD2556C61400F99A2C /* TopEntryListViewMock.swift in Sources */,
 				45B4F7D12553EF9B00EC6710 /* Top+Stubs.swift in Sources */,
 				4580EBCA2556CC09009F443E /* TestError.swift in Sources */,
 				4580EBF02556D61A009F443E /* TopEntryAuthorInfoFormatterTests.swift in Sources */,
+				45643BF2256175B90068898B /* FetchTopEntriesInteractorMock.swift in Sources */,
 				4505B1D12558417500E23F3E /* ImageRepositoryDummy.swift in Sources */,
 				4505B1AA255805DE00E23F3E /* TopEntryGatewayFetchMoreFailingStub.swift in Sources */,
 				45F003AE2553E8AA009733D0 /* TopEntryGatewayMock.swift in Sources */,
 				458E7EC22556C79200F99A2C /* TopEntryListViewDummy.swift in Sources */,
 				45F0038C2553E623009733D0 /* TestCase.swift in Sources */,
+				45643BFA256176880068898B /* FetchTopEntriesInteractorDummy.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
